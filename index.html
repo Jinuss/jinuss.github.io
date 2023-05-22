@@ -78,6 +78,9 @@
     <p>
         傻左左，如果后面有一天喜欢不动了突然放弃了，请左左不要忘记我，我从来没有这么喜欢一个人，以后也不会了。谢谢左左，左左真的超级好，5555～😫
     </p>
+    <div class="btns">
+        <button id="j">要不，再来选一次😍</button>
+    </div>
 </div>
 
 <script>
@@ -122,6 +125,11 @@
         const iBtn = document.querySelector("#i");
         iBtn.onclick = () => {
             togglePart("part7");
+        };
+
+        const jBtn = document.querySelector("#j");
+        jBtn.onclick = () => {
+            togglePart("part1");
         };
 
         function togglePart(containerId) {
