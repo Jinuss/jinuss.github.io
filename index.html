@@ -1,8 +1,86 @@
 <!DOCTYPE html>
 <html>
-  <p>左左，我们和好，再给我一个机会以男朋友的身份来照顾你，好吗？</p>
-  <div>
-    <button>再考虑下</button>
-    <button>好,可以</button>
+<style>
+    #part2,#part3,#part4,#part5,#part6 {
+        display: none;
+    }
+</style>    
+  <div id="part1">
+    <p>左左，我们和好，让我重新以男朋友的身份来照顾你陪伴你，好吗？</p>
+    <div>
+      <button id="a">好，可以</button>
+      <button id="b">我要再考虑下</button>
+    </div>
   </div>
+  <div id="part2">
+    <p>左左，谢谢你给我机会，我会爱你一生一世。小程序悄悄完成两个功能啦，左左可以写下愿望哦，我会和左左一起实现。</p>
+  </div>
+
+  <div id="part3">
+    <p>两个月以来，我真的知道错了，经常梦见左左，梦中的自己也是懊悔不已，左左还是不肯原谅我吗</p>
+    <div>
+      <button id="c">永远都不会原谅</button>
+      <button id="d">我要再考虑下</button>
+    </div>
+  </div>
+
+  <div id="part4">
+    <p>很难过，左左还是不愿意原谅我，错过可能会有遗憾，但有些坚持也没有意义</p>
+    <div>
+      <button id="e">返回上一步</button>
+      <button id="f">再见,祝好</button>
+    </div>
+  </div>
+
+  <div id="part5">
+    <p>我知道我一直是个普通的人，但是我愿意尽我所能对左左好，愿意付出所有</p>
+    <div>
+      <button id="g">好，我答应</button>
+      <button id="h">我要再考虑下</button>
+    </div>
+  </div>
+
+  <div id="part6">
+    <p>错过了这个村，我还是想在下个店等左左，左左一直是我坚定且唯一的选择。如果哪天左左真的觉得我烦了觉得和我在一起不会幸福不会开心，就告诉我，我想那时候我应该不会停留</p>
+    <div>
+      <button id="h">再见</button>
+    </div>
+  </div>
+
+  <script>
+    window.onload = () => {
+      const aBtn = document.querySelector("#a");
+      const bBtn = document.querySelector("#b");
+      aBtn.onclick = () => {
+        togglePart("part2")
+      };
+      bBtn.onclick=()=>{
+        togglePart("part3")
+      }
+
+      const cBtn = document.querySelector("#c");
+      const dBtn = document.querySelector("#d");
+      cBtn.onclick = () => {
+        togglePart("part4")
+      };
+      dBtn.onclick=()=>{
+        togglePart("part5")
+      }
+
+      const eBtn = document.querySelector("#e");
+      const fBtn = document.querySelector("#f");
+      eBtn.onclick = () => {
+        togglePart("part4")
+      };
+      fBtn.onclick=()=>{
+        togglePart("part5")
+      }
+
+
+      function togglePart(containerId){
+        document.querySelector("div").style.display='none'
+        document.querySelector(`#${containerId}`).style.display='block'
+      }
+    };
+  </script>
 </html>
