@@ -1,50 +1,82 @@
 <!DOCTYPE html>
 <html>
-<style>
-    #part2,#part3,#part4,#part5,#part6 {
-        display: none;
+  <meta
+    content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"
+    name="viewport"
+  />
+  <style>
+    div[role="part"]{
+        margin:30px 10px 10px;
     }
-</style>    
-  <div id="part1">
+    #part2,
+    #part3,
+    #part4,
+    #part5,
+    #part6,
+    #part7 {
+      display: none;
+    }
+    p {
+        text-indent: 1em;
+    }
+    div.btns{
+        display: flex;
+        justify-content: space-around;
+    }
+  </style>
+  <div id="part1" role="part">
     <p>左左，我们和好，让我重新以男朋友的身份来照顾你陪伴你，好吗？</p>
-    <div>
+    <div class="btns">
       <button id="a">好，可以</button>
       <button id="b">我要再考虑下</button>
     </div>
   </div>
-  <div id="part2">
-    <p>左左，谢谢你给我机会，我会爱你一生一世。小程序悄悄完成两个功能啦，左左可以写下愿望哦，我会和左左一起实现。</p>
+
+  <div id="part2" role="part">
+    <p>
+      谢谢左左还愿意给我机会，我会爱你一生一世。第一次和左左说爱这个词，爱相对于喜欢意味着更多的责任。小程序悄悄完成两个功能啦，左左可以写下愿望哦，我会逐个地和左左一起一一实现。
+    </p>
   </div>
 
-  <div id="part3">
-    <p>两个月以来，我真的知道错了，经常梦见左左，梦中的自己也是懊悔不已，左左还是不肯原谅我吗</p>
-    <div>
+  <div id="part3" role="part">
+    <p>
+      两个月以来，我真的知道错了，经常梦见左左，梦中的自己也是懊悔不已，左左还是不肯原谅我吗？
+    </p>
+    <div class="btns">
       <button id="c">永远都不会原谅</button>
-      <button id="d">我要再考虑下</button>
+      <button id="d">我也很纠结</button>
     </div>
   </div>
 
-  <div id="part4">
+  <div id="part4" role="part">
     <p>很难过，左左还是不愿意原谅我，错过可能会有遗憾，但有些坚持也没有意义</p>
-    <div>
+    <div class="btns">
       <button id="e">返回上一步</button>
       <button id="f">再见,祝好</button>
     </div>
   </div>
 
-  <div id="part5">
-    <p>我知道我一直是个普通的人，但是我愿意尽我所能对左左好，愿意付出所有</p>
-    <div>
+  <div id="part5" role="part">
+    <p>我知道我一直是个普通的人，但是我愿意尽我所能对左左好，愿意付出所有,也正是因为上一次的经历让我知道了我有多喜欢左左。</p>
+    <div class="btns">
       <button id="g">好，我答应</button>
-      <button id="h">我要再考虑下</button>
+      <button id="h">我要时间再考虑下</button>
     </div>
   </div>
 
-  <div id="part6">
-    <p>错过了这个村，我还是想在下个店等左左，左左一直是我坚定且唯一的选择。如果哪天左左真的觉得我烦了觉得和我在一起不会幸福不会开心，就告诉我，我想那时候我应该不会停留</p>
-    <div>
-      <button id="h">再见</button>
+  <div id="part6" role="part">
+    <p>
+      错过了这个村，我还是想在下个店等左左，左左一直是我坚定且唯一的选择。如果哪天左左真的觉得我烦了觉得和我在一起不会幸福不会开心，就告诉我，我想那时候我应该不会停留
+    </p>
+    <div class="btns">
+      <button id="i">下个店再见</button>
     </div>
+  </div>
+
+  <div id="part7" role="part">
+    <p>
+      傻左左，如果我后面喜欢不动了放弃了，请不要忘记我，我从来没有这么喜欢一个人，以后也不会了。谢谢左左，左左真的超级好，5555～
+    </p>
   </div>
 
   <script>
@@ -52,34 +84,51 @@
       const aBtn = document.querySelector("#a");
       const bBtn = document.querySelector("#b");
       aBtn.onclick = () => {
-        togglePart("part2")
+        togglePart("part2");
       };
-      bBtn.onclick=()=>{
-        togglePart("part3")
-      }
+      bBtn.onclick = () => {
+        togglePart("part3");
+      };
 
       const cBtn = document.querySelector("#c");
       const dBtn = document.querySelector("#d");
       cBtn.onclick = () => {
-        togglePart("part4")
+        togglePart("part4");
       };
-      dBtn.onclick=()=>{
-        togglePart("part5")
-      }
+      dBtn.onclick = () => {
+        togglePart("part5");
+      };
 
       const eBtn = document.querySelector("#e");
       const fBtn = document.querySelector("#f");
       eBtn.onclick = () => {
-        togglePart("part4")
+        togglePart("part3");
       };
-      fBtn.onclick=()=>{
-        togglePart("part5")
-      }
+      fBtn.onclick = () => {
+        togglePart("part6");
+      };
 
+      const gBtn = document.querySelector("#g");
+      const hBtn = document.querySelector("#h");
 
-      function togglePart(containerId){
-        document.querySelector("div").style.display='none'
-        document.querySelector(`#${containerId}`).style.display='block'
+      gBtn.onclick = () => {
+        togglePart("part2");
+      };
+      hBtn.onclick = () => {
+        togglePart("part6");
+      };
+
+      const iBtn = document.querySelector("#i");
+      iBtn.onclick = () => {
+        togglePart("part7");
+      };
+
+      function togglePart(containerId) {
+        const aDiv = document.querySelectorAll("div[role='part']");
+        for (let i = 0; i < aDiv.length; i++) {
+          aDiv[i].style.display = "none";
+        }
+        document.querySelector(`#${containerId}`).style.display = "block";
       }
     };
   </script>
