@@ -23,9 +23,25 @@
         display: flex;
         justify-content: space-around;
     }
+     @keyframes blink {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .content::after {
+            content: '|';
+            animation: blink 1000ms infinite;
+        }
 </style>
+   <script src="./eventEmitter.js"></script>
+    <script src="./autoType.js"></script>
 <div id="part1" role="part">
-    <p>左左，我们和好，好不好，让我重新以男朋友的身份来照顾你、陪伴你？</p>
+    <p id="content">左左，我们和好，好不好，让我重新以男朋友的身份来照顾你、陪伴你？</p>
     <div class="btns">
         <button id="a">好，可以</button>
         <button id="b">我要再考虑下</button>
@@ -85,6 +101,17 @@
 
 <script>
     window.onload = () => {
+         var arr = [
+            { type: 'text', text: '泻药，我家左左，又名静静，是个十足的女神经，嗯？' }
+        ]
+
+        var autoType = new AutoType("#content", arr, {
+            // 设置打字时间，表示在无设置的情况下，打字间隔为 200ms
+            speed: 200
+        });
+        autoType.once("end", function () {
+            console.log('事件结束');
+        })
         const aBtn = document.querySelector("#a");
         const bBtn = document.querySelector("#b");
         aBtn.onclick = () => {
@@ -141,5 +168,4 @@
         }
     };
 </script>
-
 </html>
