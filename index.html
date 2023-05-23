@@ -100,7 +100,11 @@
 
 <script>
     window.onload = () => {
-         var arr = [
+        const aBtn = document.querySelector("#a");
+        const bBtn = document.querySelector("#b");
+        aBtn.onclick = () => {
+            togglePart("part2");
+             var arr = [
             { type: 'text', text: ' 谢谢左左还愿意给我机会，我会爱左左一生一世。第一次和左左说爱这个词，爱相对于喜欢意味着更多的责任。目前是攒够了彩礼钱（如果是以左左朋友为标准的话，现在一个月可以存1w，我一定会让左左幸福的🌹。
 ' }
         ]
@@ -112,10 +116,6 @@
         autoType.once("end", function () {
             console.log('事件结束');
         })
-        const aBtn = document.querySelector("#a");
-        const bBtn = document.querySelector("#b");
-        aBtn.onclick = () => {
-            togglePart("part2");
         };
         bBtn.onclick = () => {
             alert("啊，选👈这个")
