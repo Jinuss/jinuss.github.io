@@ -23,23 +23,24 @@
         display: flex;
         justify-content: space-around;
     }
-     @keyframes blink {
-            from {
-                opacity: 0;
-            }
 
-            to {
-                opacity: 1;
-            }
+    @keyframes blink {
+        from {
+            opacity: 0;
         }
 
-        .content::after {
-            content: '|';
-            animation: blink 1000ms infinite;
+        to {
+            opacity: 1;
         }
+    }
+
+    .content::after {
+        content: "|";
+        animation: blink 1000ms infinite;
+    }
 </style>
-   <script src="./eventEmitter.js"></script>
-    <script src="./autoType.js"></script>
+<script src="./eventEmitter.js"></script>
+<script src="./autoType.js"></script>
 <div id="part1" role="part">
     <p>左左，我们和好，好不好，让我重新以男朋友的身份来照顾你、陪伴你？</p>
     <div class="btns">
@@ -49,8 +50,7 @@
 </div>
 
 <div id="part2" role="part">
-    <p  id="content">
-           </p>
+    <p id="content"></p>
 </div>
 <div id="part3" role="part">
     <p>
@@ -72,7 +72,7 @@
 
 <div id="part5" role="part">
     <p>
-        我知道我一直是个普通的人，但是我愿意尽我所能对左左好，愿意付出所有,也正是因为上一次的经历让我知道了我有多喜欢左左。
+        我知道我一直是个普通的人，但是我愿意尽我所能对左左好，愿意付出所有，真的希望左左能答应我，一起看去更大的世界，永远对生活满怀信心和期待。
     </p>
     <div class="btns">
         <button id="g">好，我答应</button>
@@ -81,11 +81,9 @@
 </div>
 
 <div id="part6" role="part">
-    <p>
-        错过了这个村，我还是想在下个店等左左，哈哈哈哈😄，左左一直是我坚定且唯一的思念。如果哪天左左真的觉得我烦了，觉得和我在一起不会幸福也不会开心，就告诉我，我想那时候我应该不会再叨扰左左。因为我想的，从来都是只想给左左带来快乐～
-    </p>
+    <p id="content1"></p>
     <div class="btns">
-        <button id="i">那,下个店见</button>
+        <button id="i" style="display: none">那,下个店见👋</button>
     </div>
 </div>
 
@@ -99,34 +97,108 @@
 </div>
 
 <script>
+    function auto1() {
+        var arr = [
+            {
+                type: "text",
+                text: " 谢谢左左,还愿意给我机会，我会爱左左一生一世。第一次和左左说爱这个词，爱相对于喜欢意味着更多的责任。目前是攒够了彩礼钱（如果是以左左朋友为标准的话，我一定会让左左幸福的🌹",
+            },
+        ];
+
+        var autoType = new AutoType("#content", arr, {
+            speed: 200,
+        });
+        autoType.once("end", function () {
+            console.log("事件结束");
+        });
+    }
+
+    function auto2() {
+        var arr = [
+            {
+                type: "text",
+                text: "错过了这个村，就没这个店了哦",
+            },
+            {
+                type: "wait",
+                time: 2500,
+            },
+            {
+                type: "delete",
+                num: 6,
+            },
+            {
+                type: "text",
+                text: "我还是想在下个店等左左，哈哈哈哈😄",
+            },
+            { type: "br" },
+            {
+                type: "text",
+                text: "想啥呢，左左一直是我坚定且唯一的思念，我才不会就这么放弃。",
+            },
+            {
+                type: "wait",
+                time: 3000,
+            },
+            { type: "br" },
+            {
+                type: "text",
+                speed: 100,
+                text: "emmmmm...,但如果哪天左左真的觉得我烦了，觉得和我在一起不会幸福也不会开心，就告诉我，我想那时候我应该不会再叨扰左左。",
+            },
+            {
+                type: "text",
+                text: "因为我想的，从来都是只想给左左带来快乐～",
+            },
+        ];
+
+        var autoType = new AutoType("#content1", arr, {
+            speed: 200,
+        });
+        autoType.once("end", function () {
+            document.querySelector("#i").style.display = "block";
+        });
+    }
+
     window.onload = () => {
         const aBtn = document.querySelector("#a");
         const bBtn = document.querySelector("#b");
         aBtn.onclick = () => {
             togglePart("part2");
-             var arr = [
-            {type: 'text', text: ' 谢谢左左还愿意给我机会，我会爱左左一生一世。第一次和左左说爱这个词，爱相对于喜欢意味着更多的责任。目前是攒够了彩礼钱（如果是以左左朋友为标准的话，现在一个月可以存1w，我一定会让左左幸福的🌹' }
-        ]
-
-        var autoType = new AutoType("#content", arr, {
-            // 设置打字时间，表示在无设置的情况下，打字间隔为 200ms
-            speed: 200
-        });
-        autoType.once("end", function () {
-            console.log('事件结束');
-        })
+            auto1();
         };
         bBtn.onclick = () => {
-            alert("啊，选👈这个")
-            togglePart("part3");
+            const result = confirm("啊，不是应该选👈左边这个【好,可以】吗？");
+            if (result) {
+                togglePart("part2");
+                auto1();
+            } else {
+                alert("可恶的臭左左,哼，臭左左😾");
+                setTimeout(() => {
+                    togglePart("part3");
+                }, 1000);
+            }
         };
 
         const cBtn = document.querySelector("#c");
         const dBtn = document.querySelector("#d");
         cBtn.onclick = () => {
-            togglePart("part4");
+            const result = confirm(
+                "啊，左左是可爱的左左，不是永远，真的不原谅我了吗？"
+            );
+            if (result) {
+                const result2 = confirm("真的真的不原谅我了吗？好难受啊☹️");
+                if (result2) {
+                    togglePart("part4");
+                } else {
+                    togglePart("part5");
+                }
+            } else {
+                togglePart("part5");
+            }
         };
         dBtn.onclick = () => {
+            alert("😧傻左左，纠结啥呢，有啥随时可以和我说呀？");
             togglePart("part5");
         };
 
@@ -137,6 +209,7 @@
         };
         fBtn.onclick = () => {
             togglePart("part6");
+            auto2();
         };
 
         const gBtn = document.querySelector("#g");
@@ -146,12 +219,18 @@
             togglePart("part2");
         };
         hBtn.onclick = () => {
-            togglePart("part6");
+            alert("😂傻左左，不要紧呢，首先左左要开心🎉，其次的都是其次");
+            setTimeout(() => {
+                togglePart("part7");
+            }, 1500);
         };
 
         const iBtn = document.querySelector("#i");
         iBtn.onclick = () => {
-            togglePart("part7");
+            alert("😂傻左左，不要紧呢，首先左左要开心🎉，其次的都是其次");
+            setTimeout(() => {
+                togglePart("part7");
+            }, 1500);
         };
 
         const jBtn = document.querySelector("#j");
@@ -168,4 +247,5 @@
         }
     };
 </script>
+
 </html>
