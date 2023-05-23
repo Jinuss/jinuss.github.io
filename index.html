@@ -41,7 +41,7 @@
    <script src="./eventEmitter.js"></script>
     <script src="./autoType.js"></script>
 <div id="part1" role="part">
-    <p id="content">左左，我们和好，好不好，让我重新以男朋友的身份来照顾你、陪伴你？</p>
+    <p>左左，我们和好，好不好，让我重新以男朋友的身份来照顾你、陪伴你？</p>
     <div class="btns">
         <button id="a">好，可以</button>
         <button id="b">我要再考虑下</button>
@@ -49,9 +49,8 @@
 </div>
 
 <div id="part2" role="part">
-    <p>
-        谢谢左左还愿意给我机会，我会爱左左一生一世。第一次和左左说爱这个词，爱相对于喜欢意味着更多的责任。目前是攒够了彩礼钱（如果是以左左朋友为标准的话，现在一个月可以存1w，我一定会让左左幸福的🌹。
-    </p>
+    <p  id="content">
+           </p>
 </div>
 <div id="part3" role="part">
     <p>
@@ -102,7 +101,8 @@
 <script>
     window.onload = () => {
          var arr = [
-            { type: 'text', text: '泻药，我家左左，又名静静，是个十足的女神经，嗯？' }
+            { type: 'text', text: ' 谢谢左左还愿意给我机会，我会爱左左一生一世。第一次和左左说爱这个词，爱相对于喜欢意味着更多的责任。目前是攒够了彩礼钱（如果是以左左朋友为标准的话，现在一个月可以存1w，我一定会让左左幸福的🌹。
+' }
         ]
 
         var autoType = new AutoType("#content", arr, {
@@ -118,6 +118,7 @@
             togglePart("part2");
         };
         bBtn.onclick = () => {
+            alert("啊，选👈这个")
             togglePart("part3");
         };
 
