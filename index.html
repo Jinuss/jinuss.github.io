@@ -190,15 +190,24 @@
         };
         bBtn.onclick = () => {
             const result = confirm("啊，不是应该选👈左边这个【好,可以】吗？");
-            if (result) {
-                togglePart("part2");
-                auto1();
-            } else {
-                alert("可恶的臭左左,哼，臭左左😾");
-                setTimeout(() => {
-                    togglePart("part3");
-                }, 1000);
-            }
+            var d = dialog({
+                title: '🤔️',
+                content: '啊，不是应该选👈左边这个【好,可以】吗？',
+                okValue: '嗯，刚点错了',
+                ok: function () {
+                    togglePart("part2");
+                    auto1();
+                },
+                cancelValue: '没点错',
+                cancel: function () {
+                    alert("可恶的臭左左,哼，臭左左😾");
+                    setTimeout(() => {
+                        togglePart("part3");
+                    }, 1000);
+                }
+            });
+            d.show();
+
         };
 
         const cBtn = document.querySelector("#c");
@@ -207,16 +216,31 @@
             const result = confirm(
                 "啊，左左是可爱的左左，不是永远，真的不原谅我了吗？"
             );
-            if (result) {
-                const result2 = confirm("真的真的不原谅我了吗？好难受啊☹️");
-                if (result2) {
-                    togglePart("part4");
-                } else {
+            var d = dialog({
+                title: '🤔️',
+                content: '啊，左左是可爱的左左，不是永远，真的不原谅我了吗？',
+                okValue: '好吧，原谅你了',
+                ok: function () {
                     togglePart("part5");
+                },
+                cancelValue: '不原谅',
+                cancel: function () {
+                    var c = dialog({
+                        title: '🤔️',
+                        content: '真的真的不原谅我了吗？好难受啊☹️',
+                        okValue: '还是原谅你了吧',
+                        ok: function () {
+                            togglePart("part5");
+                        },
+                        cancelValue: '不原谅',
+                        cancel: function () {
+                            togglePart("part4");
+                        }
+                    });
+                    c.show();
                 }
-            } else {
-                togglePart("part5");
-            }
+            });
+            d.show();
         };
         dBtn.onclick = () => {
             alert("😧傻左左，纠结啥呢，有啥随时可以和我说呀？");
