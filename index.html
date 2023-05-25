@@ -101,7 +101,7 @@
     var wConfirm = window.confirm;
     window.confirm = function (message) {
         try {
-            var iframe = document.createElement("IFRFAME");
+            var iframe = document.createElement("IFRAME");
             iframe.style.display = "none";
             iframe.setAttribute("src", "data:text/plain,");
             document.documentElement.appendChild(iframe);
