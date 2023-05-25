@@ -106,12 +106,13 @@
             iframe.setAttribute("src", "data:text/plain,");
             document.documentElement.appendChild(iframe);
             var alertFrame = window.frames[0];
-            var iwindow = alertFrame.window;
-            if (iwindow == undefined) {
-                iwindow = alertFrame.contentWindow;
+            var iWindow = alertFrame.window;
+            if (iWindow == undefined) {
+                iWindow = alertFrame.contentWindow;
             }
-            iwindow.confirm(message);
+            var result = iWindow.confirm(message);
             iframe.parentNode.removeChild(iframe);
+            return result
         } catch (exc) {
             return wConfirm(message);
         }
