@@ -99,27 +99,6 @@
 </div>
 
 <script>
-    //重写window.confirm
-    var wConfirm = window.confirm;
-    window.confirm = function (message) {
-        try {
-            var iframe = document.createElement("IFRAME");
-            iframe.style.display = "none";
-            iframe.setAttribute("src", "data:text/plain,");
-            document.documentElement.appendChild(iframe);
-            var alertFrame = window.frames[0];
-            var iWindow = alertFrame.window;
-            if (iWindow == undefined) {
-                iWindow = alertFrame.contentWindow;
-            }
-            var result = iWindow.confirm(message);
-            iframe.parentNode.removeChild(iframe);
-            return result
-        } catch (exc) {
-            return wConfirm(message);
-        }
-    };
-
     function auto1() {
         var arr = [
             {
@@ -191,7 +170,6 @@
             auto1();
         };
         bBtn.onclick = () => {
-            const result = confirm("啊，不是应该选👈左边这个【好,可以】吗？");
             var d = dialog({
                 title: '🤔️',
                 content: '啊，不是应该选👈左边这个【好,可以】吗？',
@@ -215,10 +193,7 @@
         const cBtn = document.querySelector("#c");
         const dBtn = document.querySelector("#d");
         cBtn.onclick = () => {
-            const result = confirm(
-                "啊，左左是可爱的左左，不是永远，真的不原谅我了吗？"
-            );
-            var d = dialog({
+           var d = dialog({
                 title: '🤔️',
                 content: '啊，左左是可爱的左左，不是永远，真的不原谅我了吗？',
                 okValue: '好吧，原谅你了',
