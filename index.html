@@ -1,105 +1,112 @@
 <!DOCTYPE html>
 <html>
-<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
-<style>
+  <meta
+    content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"
+    name="viewport"
+  />
+  <style>
     div[role="part"] {
-        margin: 30px 10px 10px;
+      margin: 30px 10px 10px;
     }
 
     #part2,
     #btns {
-        display: none;
+      display: none;
     }
 
     p {
-        text-indent: 2em;
-        line-height: 2;
+      text-indent: 2em;
+      line-height: 2;
     }
 
     div.btns {
-        display: flex;
-        justify-content: space-around;
+      display: flex;
+      justify-content: space-around;
     }
 
     @keyframes blink {
-        from {
-            opacity: 0;
-        }
+      from {
+        opacity: 0;
+      }
 
-        to {
-            opacity: 1;
-        }
+      to {
+        opacity: 1;
+      }
     }
 
     .content::after {
-        content: "|";
-        animation: blink 1000ms infinite;
+      content: "|";
+      animation: blink 1000ms infinite;
     }
 
     img {
-        width: 320px;
+      width: 320px;
     }
-</style>
-<script src="./eventEmitter.js"></script>
-<script src="./autoType.js"></script>
-<script src="./jq.js"></script>
-<script src="./modal.js"></script>
-<html>
-<div id="part1" role="part">
-    <p id="content"></p>
-    <div id="btns" class="btns">
+  </style>
+  <script src="./eventEmitter.js"></script>
+  <script src="./autoType.js"></script>
+  <script src="./jq.js"></script>
+  <script src="./modal.js"></script>
+  <html>
+    <div id="part1" role="part">
+      <p id="content"></p>
+      <div id="btns" class="btns">
         <button id="a">A：好</button>
         <button id="b">B：选A</button>
+      </div>
     </div>
-</div>
 
-<div id="part2" role="part">
-    <p>
+    <div id="part2" role="part">
+      <p>
         谢谢左左，还愿意给我机会。时间会证明一切，往后的岁月里，我们一起走，我一定会真心真意全心全意，让左左开心和幸福🌹...
-    </p>
-    <img src="./img.jpeg" />
-</div>
-<video controls="controls" autoplay="autoplay" src="./mp3.mp3"  style="opacity:0" preload="auto" controls hidden="true" loop>
-    您的浏览器不支持video元素。
-  </video>
-</html>
+      </p>
+      <img src="./img.jpeg" />
+    </div>
+    <video src="./mp3.mp3" id="audios" opacity="0" preload="auto" controls loop>
+      您的浏览器不支持video元素。
+    </video>
+  </html>
 
-<script>
+  <script>
     function auto() {
-        var arr = [
-            {
-                type: "text",
-                text: " 左左，我们和好，再给我一个机会，让我重新以男朋友的身份来照顾你、陪伴你，好不好？一不小心就发现我爱上左左了，第一次和左左说【爱】这个词。我知道，爱相对于喜欢意味着更多的责任和情愫。人们常说厚爱无需多言，可是我总是忍不住表达爱意，真的好喜欢左左啊，真的很想对左左好，左左真的好好啊，从没想过我会这么思念一个女孩。不过那个女孩是左左，就很正常了。我想给予左左更多的好和爱，还有更多的陪伴。所以傻左左可以再给我一个机会，好吗？",
-            },
-        ];
+      var arr = [
+        {
+          type: "text",
+          text: " 左左，我们和好，再给我一个机会，让我重新以男朋友的身份来照顾你、陪伴你，好不好？一不小心就发现我爱上左左了，第一次和左左说【爱】这个词。我知道，爱相对于喜欢意味着更多的责任和情愫。人们常说厚爱无需多言，可是我总是忍不住表达爱意，真的好喜欢左左啊，真的很想对左左好，左左真的好好啊，从没想过我会这么思念一个女孩。不过那个女孩是左左，就很正常了。我想给予左左更多的好和爱，还有更多的陪伴。所以傻左左可以再给我一个机会，好吗？",
+        },
+      ];
 
-        var autoType = new AutoType("#content", arr, {
-            speed: 200,
-        });
-        autoType.once("end", function () {
-            document.querySelectorAll("#btns")[0].style.display = "flex";
-        });
+      var autoType = new AutoType("#content", arr, {
+        speed: 200,
+      });
+      autoType.once("end", function () {
+        document.querySelectorAll("#btns")[0].style.display = "flex";
+      });
     }
 
     window.onload = () => {
-        auto();
-        const aBtn = document.querySelector("#a");
-        const bBtn = document.querySelector("#b");
-        aBtn.onclick = () => {
-            togglePart("part2");
-        };
-        bBtn.onclick = () => {
-            togglePart("part2");
-        };
+      try {
+        document.addEventListener("WeixinJSBridgeReady", function () {
+          document.getElementById("audios").play();
+        });
+      } catch {}
+      auto();
+      const aBtn = document.querySelector("#a");
+      const bBtn = document.querySelector("#b");
+      aBtn.onclick = () => {
+        togglePart("part2");
+      };
+      bBtn.onclick = () => {
+        togglePart("part2");
+      };
     };
 
     function togglePart(containerId) {
-        const aDiv = document.querySelectorAll("div[role='part']");
-        for (let i = 0; i < aDiv.length; i++) {
-            aDiv[i].style.display = "none";
-        }
-        document.querySelector(`#${containerId}`).style.display = "block";
+      const aDiv = document.querySelectorAll("div[role='part']");
+      for (let i = 0; i < aDiv.length; i++) {
+        aDiv[i].style.display = "none";
+      }
+      document.querySelector(`#${containerId}`).style.display = "block";
     }
-</script>
-
+  </script>
 </html>
