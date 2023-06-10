@@ -5,10 +5,17 @@
     name="viewport"
   />
   <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+    }
     div[role="part"] {
       margin: 30px 10px 10px;
     }
 
+    #part1,
     #part2,
     #btns {
       display: none;
@@ -39,15 +46,30 @@
       animation: blink 1000ms infinite;
     }
 
-    img {
+    img.min {
       width: 320px;
+    }
+    img.max {
+      height: 100%;
+      width: 100%;
+      opacity: 0.4;
+    }
+
+    img.gif {
+      position: absolute;
+      left: calc(50% - 50px);
+      width: 100px;
+      border-radius: 50%;
+      top: calc(50% - 50px);
     }
   </style>
   <script src="./eventEmitter.js"></script>
   <script src="./autoType.js"></script>
   <script src="./jq.js"></script>
   <script src="./modal.js"></script>
-  <html>
+  <body>
+    <img class="max" src="./page.jpg" />
+    <img class="gif" src="./click.gif" />
     <div id="part1" role="part">
       <p id="content"></p>
       <div id="btns" class="btns">
@@ -60,19 +82,27 @@
       <p>
         谢谢左左，还愿意给我机会。时间会证明一切，往后的岁月里，我们一起走，我一定会真心真意全心全意，让左左开心和幸福🌹...
       </p>
-      <img src="./img.jpeg" />
+      <img src="./img.jpeg" class="min" />
     </div>
-    <video src="./mp3.mp3" id="audios" opacity="0" preload="auto" controls loop>
+    <video
+      src="./mp3.mp3"
+      id="audios"
+      opacity="0"
+      hidden="true"
+      preload="auto"
+      controls
+      loop
+    >
       您的浏览器不支持video元素。
     </video>
-  </html>
+  </body>
 
   <script>
     function auto() {
       var arr = [
         {
           type: "text",
-          text: " 左左，我们和好，再给我一个机会，让我重新以男朋友的身份来照顾你、陪伴你，好不好？一不小心就发现我爱上左左了，第一次和左左说【爱】这个词。我知道，爱相对于喜欢意味着更多的责任和情愫。人们常说厚爱无需多言，可是我总是忍不住表达爱意，真的好喜欢左左啊，真的很想对左左好，左左真的好好啊，从没想过我会这么思念一个女孩。不过那个女孩是左左，就很正常了。我想给予左左更多的好和爱，还有更多的陪伴。所以傻左左可以再给我一个机会，好吗？",
+          text: " 左左，我们和好，再给我一个机会，让我重新以男朋友的身份来照顾你、陪伴你，好不好？经历了这么多，一不小心就发现我爱上左左了，第一次和左左说【爱】这个词。我知道，爱相对于喜欢意味着更多的责任和情愫。人们常说厚爱无需多言，可是我总是忍不住表达爱意，真的好喜欢左左啊，真的很想对左左好，左左真的好好啊，从没想过我会这么思念一个女孩。不过那个女孩是左左，就很正常了。我想给予左左更多的好和爱，还有更多的陪伴。所以傻左左可以再给我一个机会，好吗？",
         },
       ];
 
@@ -84,13 +114,26 @@
       });
     }
 
+    function toggleSound() {
+      var music = document.getElementById("audios"); //获取ID
+
+      if (music.paused) {
+        //判读是否播放
+        music.paused = false;
+        music.play(); //没有就播放
+      }
+    }
+
     window.onload = () => {
-      try {
-        document.addEventListener("WeixinJSBridgeReady", function () {
-          document.getElementById("audios").play();
-        });
-      } catch {}
-      auto();
+      const Img = document.querySelector(".gif");
+      Img.onclick = () => {
+        toggleSound();
+        Img.style.display = "none";
+        document.querySelector(".max").style.display = "none";
+        document.querySelector("#part1").style.display = "block";
+        auto();
+      };
+
       const aBtn = document.querySelector("#a");
       const bBtn = document.querySelector("#b");
       aBtn.onclick = () => {
